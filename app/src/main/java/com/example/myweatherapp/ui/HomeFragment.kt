@@ -80,26 +80,22 @@ class HomeFragment @Inject constructor(
     private fun observeStateFlow() {
         lifecycleScope.launch {
             viewModel.listNearLocations.collect {
-                when (it.status) {
-                    Status.SUCCESS -> {
-                        binding.homeProgressBar.visibility = View.GONE
-                        it.data?.let { listNearLocationsResponse ->
-                            val listNearLocations =
-                                listNearLocationsResponse.map { nearLocationsResponse ->
-                                    nearLocationsResponse.toNearLocations()
-                                }
-                            locationsRecyclerViewAdapter.locations = listNearLocations
-                        }
-                    }
-                    Status.LOADING -> {
-                        binding.homeProgressBar.visibility = View.VISIBLE
-                    }
-                    Status.ERROR -> {
-                        binding.homeProgressBar.visibility = View.GONE
-                        Toast.makeText(binding.root.context, it.message?: "Error Occurred!", Toast.LENGTH_LONG)
-                            .show()
-                    }
-                }
+                  when (it.status) {
+                       Status.SUCCESS -> {
+                           binding.homeProgressBar.visibility = View.GONE
+                           it.data?.let { listNearLocationsResponse ->
+                               locationsRecyclerViewAdapter.locations = listNearLocationsResponse
+                           }
+                       }
+                       Status.LOADING -> {
+                           binding.homeProgressBar.visibility = View.VISIBLE
+                       }
+                       Status.ERROR -> {
+                           binding.homeProgressBar.visibility = View.GONE
+                           Toast.makeText(binding.root.context, it.message?: "Error Occurred!", Toast.LENGTH_LONG)
+                               .show()
+                       }
+                   }
             }
         }
     }

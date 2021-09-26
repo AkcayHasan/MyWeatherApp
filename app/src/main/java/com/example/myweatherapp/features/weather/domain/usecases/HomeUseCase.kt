@@ -1,6 +1,8 @@
 package com.example.myweatherapp.features.weather.domain.usecases
 
 import com.example.myweatherapp.features.weather.data.entities.locationresponse.NearLocationsResponse
+import com.example.myweatherapp.features.weather.domain.entities.location.NearLocations
+import com.example.myweatherapp.features.weather.domain.mapper.toNearLocations
 import com.example.myweatherapp.features.weather.domain.repository.IWeatherRepository
 import com.example.myweatherapp.util.Resource
 import kotlinx.coroutines.Dispatchers
@@ -16,11 +18,16 @@ class HomeUseCase @Inject constructor(
     suspend fun getNearLocations(
         searchText: String?,
         lattLong: String?
-    ): Flow<Resource<List<NearLocationsResponse>>> {
+    ): Flow<Resource<List<NearLocations>>> {
         return flow {
             val result = weatherRepository.getNearLocations(searchText, lattLong)
-            //emit(Resource.loading(null))
-            emit(result)
+            result.data?.let {
+               emit( Resource.success(it.map {
+                    it.toNearLocations()
+                }))
+            }?: kotlin.run {
+                emit(Resource.error(result.message?:"",null))
+            }
         }.flowOn(Dispatchers.IO)
     }
 

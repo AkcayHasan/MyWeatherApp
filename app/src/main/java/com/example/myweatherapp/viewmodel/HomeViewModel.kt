@@ -3,6 +3,7 @@ package com.example.myweatherapp.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myweatherapp.features.weather.data.entities.locationresponse.NearLocationsResponse
+import com.example.myweatherapp.features.weather.domain.entities.location.NearLocations
 import com.example.myweatherapp.features.weather.domain.usecases.HomeUseCase
 import com.example.myweatherapp.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,8 +20,8 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val nearLocations =
-        MutableStateFlow<Resource<List<NearLocationsResponse>>>(Resource.success(null))
-    val listNearLocations: StateFlow<Resource<List<NearLocationsResponse>>>
+        MutableStateFlow<Resource<List<NearLocations>>>(Resource.success(null))
+    val listNearLocations: StateFlow<Resource<List<NearLocations>>>
         get() = nearLocations
 
     suspend fun getNearLocations(searchText: String?, lattLong: String?) {

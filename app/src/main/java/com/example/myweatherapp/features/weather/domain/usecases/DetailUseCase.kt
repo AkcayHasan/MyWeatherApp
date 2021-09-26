@@ -15,8 +15,9 @@ class DetailUseCase @Inject constructor(
 
     suspend fun getLocationWeatherInfo(woeId: Int): Flow<Resource<LocationWeatherResponse>> {
         return flow {
+            emit(Resource.loading(null))
             val result = weatherRepository.getLocationWeatherInfo(woeId)
-            //emit(Resource.loading(null))
+            //
             emit(result)
         }.flowOn(Dispatchers.IO)
     }

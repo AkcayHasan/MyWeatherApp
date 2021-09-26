@@ -24,7 +24,6 @@ class DetailViewModel @Inject constructor(
 
 
     suspend fun getLocationWeatherInfo(woeId: Int) {
-        locationWeatherInfo.value = Resource.loading(null)
         viewModelScope.launch {
             try {
                 detailUseCase.getLocationWeatherInfo(woeId).collect {

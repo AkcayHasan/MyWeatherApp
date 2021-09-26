@@ -16,7 +16,7 @@ import com.example.myweatherapp.R
 import com.example.myweatherapp.databinding.ActivityMainBinding
 import com.example.myweatherapp.util.Constants
 import com.example.myweatherapp.util.LocationTrackListener
-import com.example.myweatherapp.util.LocationUtility
+import com.example.myweatherapp.util.LocationUtil
 import com.google.android.gms.location.*
 import dagger.hilt.android.AndroidEntryPoint
 import pub.devrel.easypermissions.AppSettingsDialog
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
     override fun onStart() {
         super.onStart()
-        if (!LocationUtility.hasLocationPermissions(this)) {
+        if (!LocationUtil.hasLocationPermissions(this)) {
             requestPermissions()
         } else {
             getLastLocations()
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
     @SuppressLint("MissingPermission")
     private fun getLastLocations() {
-        if (LocationUtility.hasLocationPermissions(this)) {
+        if (LocationUtil.hasLocationPermissions(this)) {
             if (isLocationEnabled()) {
                 getLocationValues()
             } else {

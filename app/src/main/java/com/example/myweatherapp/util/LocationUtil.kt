@@ -4,7 +4,7 @@ import android.Manifest
 import android.content.Context
 import pub.devrel.easypermissions.EasyPermissions
 
-object LocationUtility {
+object LocationUtil {
 
     fun hasLocationPermissions(context: Context): Boolean {
         return EasyPermissions.hasPermissions(
