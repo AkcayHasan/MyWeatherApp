@@ -50,7 +50,7 @@ class HomeFragment @Inject constructor(
             layoutManager = LinearLayoutManager(binding.root.context)
         }
 
-        subscribeToViewModel()
+        observeStateFlow()
 
         binding.searchText.addTextChangedListener {
             job?.cancel()
@@ -77,12 +77,12 @@ class HomeFragment @Inject constructor(
 
     }
 
-    private fun subscribeToViewModel() {
+    private fun observeStateFlow() {
         lifecycleScope.launch {
             viewModel.listNearLocations.collect {
                 when (it.status) {
                     Status.SUCCESS -> {
-                        binding.progressBar.visibility = View.GONE
+                        binding.homeProgressBar.visibility = View.GONE
                         it.data?.let { listNearLocationsResponse ->
                             val listNearLocations =
                                 listNearLocationsResponse.map { nearLocationsResponse ->
@@ -92,11 +92,11 @@ class HomeFragment @Inject constructor(
                         }
                     }
                     Status.LOADING -> {
-                        binding.progressBar.visibility = View.VISIBLE
+                        binding.homeProgressBar.visibility = View.VISIBLE
                     }
                     Status.ERROR -> {
-                        binding.progressBar.visibility = View.GONE
-                        Toast.makeText(binding.root.context, "Error Occurred!", Toast.LENGTH_LONG)
+                        binding.homeProgressBar.visibility = View.GONE
+                        Toast.makeText(binding.root.context, it.message?: "Error Occurred!", Toast.LENGTH_LONG)
                             .show()
                     }
                 }

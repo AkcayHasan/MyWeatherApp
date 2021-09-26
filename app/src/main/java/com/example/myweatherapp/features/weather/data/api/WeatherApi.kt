@@ -15,9 +15,9 @@ interface WeatherApi {
         @Query("lattlong") lattLong: String?
     ): Response<List<NearLocationsResponse>>
 
-    @GET("location/{woeid}")
-    fun getLocationWeatherInfo(
-        @Path("woeid") woeId: Long
+    @GET("location/{woeid}/")
+    suspend fun getLocationWeather(
+        @Path("woeid") woeId: Int
     ): Response<LocationWeatherResponse>
 
 }

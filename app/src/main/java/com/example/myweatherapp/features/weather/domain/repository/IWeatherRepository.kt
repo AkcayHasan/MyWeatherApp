@@ -11,5 +11,5 @@ interface IWeatherRepository {
         lattLong: String?
     ): Resource<List<NearLocationsResponse>>
 
-    suspend fun getLocationWeatherInfo(woeId: Long): Resource<LocationWeatherResponse>
+    suspend fun getLocationWeatherInfo(woeId: Int): Resource<LocationWeatherResponse>
 }

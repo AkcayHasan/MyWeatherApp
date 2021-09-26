@@ -6,13 +6,13 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myweatherapp.databinding.RowLocationBinding
-import com.example.myweatherapp.features.weather.domain.entities.NearLocations
+import com.example.myweatherapp.features.weather.domain.entities.location.NearLocations
 import javax.inject.Inject
 
 class LocationsRecyclerViewAdapter @Inject constructor() :
     RecyclerView.Adapter<LocationsRecyclerViewAdapter.LocationsViewHolder>() {
 
-    private var locationClickListener: ((Long) -> Unit)? = null
+    private var locationClickListener: ((Int) -> Unit)? = null
 
     inner class LocationsViewHolder(private val itemViewBinding: RowLocationBinding) :
         RecyclerView.ViewHolder(itemViewBinding.root) {
@@ -24,7 +24,7 @@ class LocationsRecyclerViewAdapter @Inject constructor() :
     }
 
 
-    fun setOnLocationClickListener(listener: (Long) -> Unit) {
+    fun setOnLocationClickListener(listener: (Int) -> Unit) {
         locationClickListener = listener
     }
 
@@ -57,7 +57,7 @@ class LocationsRecyclerViewAdapter @Inject constructor() :
 
         holder.itemView.setOnClickListener {
             locationClickListener?.let {
-                it(locationInstance.earthId)
+                it(locationInstance.woeId)
             }
         }
     }

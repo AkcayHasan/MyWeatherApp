@@ -21,9 +21,9 @@ data class LocationWeatherResponse(
     val title: String,
     @SerializedName("location_type")
     val locationType: String,
-    @SerializedName("consolidated_weather")
-    val woeId: Long,
     @SerializedName("woeid")
+    val woeId: Int,
+    @SerializedName("latt_long")
     val lattLong: String,
     @SerializedName("timezone")
     val timezone: String

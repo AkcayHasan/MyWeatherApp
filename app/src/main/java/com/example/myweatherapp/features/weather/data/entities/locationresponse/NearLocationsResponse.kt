@@ -10,7 +10,7 @@ data class NearLocationsResponse(
     @SerializedName("location_type")
     val locationType: String,
     @SerializedName("woeid")
-    val woeId: Long,
+    val woeId: Int,
     @SerializedName("latt_long")
     val lattLong: String
 )

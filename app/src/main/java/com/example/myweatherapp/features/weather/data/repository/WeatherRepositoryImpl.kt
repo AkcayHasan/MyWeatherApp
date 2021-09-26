@@ -16,9 +16,9 @@ class WeatherRepositoryImpl @Inject constructor(
         lattLong: String?
     ): Resource<List<NearLocationsResponse>> {
         return try {
-            val response = retrofit.getNearLocations(searchText, lattLong)
-            if (response.isSuccessful) {
-                response.body()?.let {
+            val locationResponse = retrofit.getNearLocations(searchText, lattLong)
+            if (locationResponse.isSuccessful) {
+                locationResponse.body()?.let {
                     return@let Resource.success(it)
                 } ?: Resource.error("An Error Occured!", null)
             } else {
@@ -30,11 +30,11 @@ class WeatherRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getLocationWeatherInfo(woeId: Long): Resource<LocationWeatherResponse> {
+    override suspend fun getLocationWeatherInfo(woeId: Int): Resource<LocationWeatherResponse> {
         return try {
-            val response = retrofit.getLocationWeatherInfo(woeId)
-            if (response.isSuccessful) {
-                response.body()?.let {
+            val weatherResponse = retrofit.getLocationWeather(woeId)
+            if (weatherResponse.isSuccessful) {
+                weatherResponse.body()?.let {
                     return@let Resource.success(it)
                 } ?: Resource.error("An Error Occured!", null)
             } else {

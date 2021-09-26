@@ -24,6 +24,7 @@ class HomeViewModel @Inject constructor(
         get() = nearLocations
 
     suspend fun getNearLocations(searchText: String?, lattLong: String?) {
+        nearLocations.value = Resource.loading(null)
         viewModelScope.launch {
             try {
                 homeUseCase.getNearLocations(searchText, lattLong).collect {

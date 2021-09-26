@@ -7,6 +7,7 @@ import android.content.Intent
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Looper
 import android.provider.Settings
 import android.widget.Toast
 import androidx.navigation.fragment.NavHostFragment
@@ -27,6 +28,8 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var locationRequest: LocationRequest
+    private lateinit var locationCallback: LocationCallback
 
 
     private lateinit var locationTrackListener: LocationTrackListener
@@ -46,6 +49,18 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(result: LocationResult) {
+                for (location in result.locations) {
+                    if (location != null) {
+                        App.currentLatitude = location.latitude.toString()
+                        App.currentLongitude = location.longitude.toString()
+                        locationTrackListener.locationTrack(true)
+                    }
+                }
+            }
+        }
     }
 
     fun setOnlocationTrackListener(listener: LocationTrackListener) {
@@ -86,6 +101,8 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         )
     }
 
+
+
     @SuppressLint("MissingPermission")
     private fun getLocationValues() {
         fusedLocationClient.lastLocation.addOnCompleteListener(this) { task ->
@@ -94,8 +111,21 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
                 App.currentLatitude = lastLocation.latitude.toString()
                 App.currentLongitude = lastLocation.longitude.toString()
                 locationTrackListener.locationTrack(true)
+            } else {
+                locationRequest = LocationRequest.create()
+                locationRequest.apply {
+                    priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+                    interval = 20 * 1000L
+                }
+
+                fusedLocationClient.requestLocationUpdates(
+                    locationRequest,
+                    locationCallback,
+                    Looper.getMainLooper()
+                )
             }
         }
+        fusedLocationClient.removeLocationUpdates(locationCallback)
     }
 
     private fun isLocationEnabled(): Boolean {

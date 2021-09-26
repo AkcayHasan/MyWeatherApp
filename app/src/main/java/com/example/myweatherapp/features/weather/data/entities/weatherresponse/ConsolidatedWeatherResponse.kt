@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class ConsolidatedWeatherResponse(
     @SerializedName("air_pressure")
-    val airPressure: Int,
+    val airPressure: Double,
     @SerializedName("applicable_date")
     val applicableDate: String,
     @SerializedName("created")

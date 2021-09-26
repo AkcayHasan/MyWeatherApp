@@ -19,7 +19,7 @@ class HomeUseCase @Inject constructor(
     ): Flow<Resource<List<NearLocationsResponse>>> {
         return flow {
             val result = weatherRepository.getNearLocations(searchText, lattLong)
-            emit(Resource.loading(null))
+            //emit(Resource.loading(null))
             emit(result)
         }.flowOn(Dispatchers.IO)
     }
