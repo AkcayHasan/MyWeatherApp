@@ -49,7 +49,9 @@ class DetailFragment @Inject constructor(
                     Status.SUCCESS -> {
                         binding.detailProgressBar.visibility = View.GONE
                         it.data?.let { response ->
-                            val result = response.toLocationWeatherInfo()
+                            val weatherResult = response.toLocationWeatherInfo()
+
+
                         }
                     }
                     Status.LOADING -> {

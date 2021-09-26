@@ -46,6 +46,7 @@
                     android:gravity="center">
 
                     <ImageView
+                        android:id="@+id/ivMainTodayWeatherIcon"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         android:layout_marginStart="10dp"
@@ -61,13 +62,14 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tvMainTodayWeather"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="19°C"
                         android:textSize="80sp" />
 
                     <TextView
-                        android:id="@+id/weatherStateName"
+                        android:id="@+id/tvMainTodayWeatherState"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Light Cloud"
@@ -98,6 +100,7 @@
                         android:textSize="15sp" />
 
                     <TextView
+                        android:id="@+id/tvMainTodayWeatherTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="HUMIDITY"
@@ -121,6 +124,7 @@
                         android:textSize="15sp" />
 
                     <TextView
+                        android:id="@+id/tvMainTodayWeatherSunRise"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="HUMIDITY"
@@ -144,6 +148,7 @@
                         android:textSize="15sp" />
 
                     <TextView
+                        android:id="@+id/tvMainTodayWeatherSunSet"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="HUMIDITY"
@@ -196,6 +201,7 @@
                     android:orientation="vertical">
 
                     <ImageView
+                        android:id="@+id/ivTodayWeatherIcon"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/ic_launcher_background" />
@@ -216,6 +222,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tvTodayWeatherMinTemp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
@@ -231,6 +238,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tvTodayWeatherMaxTemp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="15dp"
@@ -279,6 +287,7 @@
                     android:orientation="vertical">
 
                     <ImageView
+                        android:id="@+id/ivTomorrowWeatherIcon"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/ic_launcher_background" />
@@ -299,6 +308,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tvTomorrowWeatherMinTemp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
@@ -314,6 +324,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tvTomorrowWeatherMaxTemp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="15dp"
@@ -345,6 +356,7 @@
 
 
                     <TextView
+                        android:id="@+id/tvDaysName1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Days"
@@ -362,6 +374,7 @@
                     android:orientation="vertical">
 
                     <ImageView
+                        android:id="@+id/ivDays1WeatherIcon"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/ic_launcher_background" />
@@ -382,6 +395,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tvDays1WeatherMinTemp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
@@ -397,6 +411,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tvDays1WeatherMaxTemp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="15dp"
@@ -428,6 +443,7 @@
 
 
                     <TextView
+                        android:id="@+id/tvDaysName2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Days"
@@ -445,6 +461,7 @@
                     android:orientation="vertical">
 
                     <ImageView
+                        android:id="@+id/ivDays2WeatherIcon"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/ic_launcher_background" />
@@ -465,6 +482,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tvDays2WeatherMinTemp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
@@ -480,6 +498,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tvDays2WeatherMaxTemp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="15dp"
@@ -511,6 +530,7 @@
 
 
                     <TextView
+                        android:id="@+id/tvDaysName3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Days"
@@ -528,6 +548,7 @@
                     android:orientation="vertical">
 
                     <ImageView
+                        android:id="@+id/ivDays3WeatherIcon"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/ic_launcher_background" />
@@ -548,6 +569,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tvDays3WeatherMinTemp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
@@ -563,6 +585,94 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tvDays3WeatherMaxTemp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="15dp"
+                            android:gravity="center"
+                            android:text="19°C"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/tvDaysName4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Days"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/ivDays4WeatherIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_launcher_background" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvDays4WeatherMinTemp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="19°C"
+                            android:textSize="17sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvDays4WeatherMaxTemp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="15dp"
@@ -608,6 +718,7 @@
                         android:textSize="15sp" />
 
                     <TextView
+                        android:id="@+id/tvMainTodayWeatherWind"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="HUMIDITY"
@@ -631,6 +742,7 @@
                         android:textSize="15sp" />
 
                     <TextView
+                        android:id="@+id/tvMainTodayWeatherHumidity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="HUMIDITY"
@@ -654,6 +766,7 @@
                         android:textSize="15sp" />
 
                     <TextView
+                        android:id="@+id/tvMainTodayWeatherVisibility"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="HUMIDITY"
@@ -661,6 +774,39 @@
                         android:textSize="20sp" />
 
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TIMEZONE"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tvMainTodayWeatherTimeZone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="HUMIDITY"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+
+                </LinearLayout>
+
 
             </LinearLayout>
 
