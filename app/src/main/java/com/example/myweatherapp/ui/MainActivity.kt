@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
 import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.myweatherapp.App
 import com.example.myweatherapp.R
@@ -50,17 +51,6 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        locationCallback = object : LocationCallback() {
-            override fun onLocationResult(result: LocationResult) {
-                for (location in result.locations) {
-                    if (location != null) {
-                        App.currentLatitude = location.latitude.toString()
-                        App.currentLongitude = location.longitude.toString()
-                        locationTrackListener.locationTrack(true)
-                    }
-                }
-            }
-        }
     }
 
     fun setOnlocationTrackListener(listener: LocationTrackListener) {
@@ -80,7 +70,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     private fun getLastLocations() {
         if (LocationUtil.hasLocationPermissions(this)) {
             if (isLocationEnabled()) {
-                getLocationValues()
+                locationTrackListener.locationTrack(true)
             } else {
                 Toast.makeText(this, "Turn on location", Toast.LENGTH_LONG).show()
                 val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
@@ -101,33 +91,6 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         )
     }
 
-
-
-    @SuppressLint("MissingPermission")
-    private fun getLocationValues() {
-        fusedLocationClient.lastLocation.addOnCompleteListener(this) { task ->
-            if (task.isSuccessful && task.result != null) {
-                val lastLocation = task.result
-                App.currentLatitude = lastLocation.latitude.toString()
-                App.currentLongitude = lastLocation.longitude.toString()
-                locationTrackListener.locationTrack(true)
-            } else {
-                locationRequest = LocationRequest.create()
-                locationRequest.apply {
-                    priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-                    interval = 20 * 1000L
-                }
-
-                fusedLocationClient.requestLocationUpdates(
-                    locationRequest,
-                    locationCallback,
-                    Looper.getMainLooper()
-                )
-            }
-        }
-        fusedLocationClient.removeLocationUpdates(locationCallback)
-    }
-
     private fun isLocationEnabled(): Boolean {
         val locationManager: LocationManager =
             getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -137,7 +100,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     }
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
-        getLastLocations()
+        locationTrackListener.locationTrack(true)
     }
 
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
@@ -155,6 +118,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     ) {
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
     }
 
 }

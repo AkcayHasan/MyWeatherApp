@@ -2,7 +2,7 @@ package com.example.myweatherapp.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myweatherapp.features.weather.data.entities.locationresponse.NearLocationsResponse
+import com.example.myweatherapp.features.permission.domain.usecase.OperationSystemUseCase
 import com.example.myweatherapp.features.weather.domain.entities.location.NearLocations
 import com.example.myweatherapp.features.weather.domain.usecases.HomeUseCase
 import com.example.myweatherapp.util.Resource
@@ -16,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val homeUseCase: HomeUseCase
+    private val homeUseCase: HomeUseCase,
+    private val operationSystemUseCase: OperationSystemUseCase
 ) : ViewModel() {
 
     private val nearLocations =
@@ -24,13 +25,22 @@ class HomeViewModel @Inject constructor(
     val listNearLocations: StateFlow<Resource<List<NearLocations>>>
         get() = nearLocations
 
-    suspend fun getNearLocations(searchText: String?, lattLong: String?) {
+    suspend fun getNearLocations(searchText: String?) {
         nearLocations.value = Resource.loading(null)
         viewModelScope.launch {
             try {
-                homeUseCase.getNearLocations(searchText, lattLong).collect {
-                    nearLocations.value = it
+                operationSystemUseCase.getUserLocation().collect {
+                    if (searchText?.isNotEmpty() == true){
+                        homeUseCase.getNearLocations(searchText, null).collect { response ->
+                            nearLocations.value = response
+                        }
+                    }else{
+                        homeUseCase.getNearLocations(searchText, "${it.latitude}, ${it.longitude}").collect { response ->
+                            nearLocations.value = response
+                        }
+                    }
                 }
+
             }catch (e: Exception){
                 e.printStackTrace()
             }

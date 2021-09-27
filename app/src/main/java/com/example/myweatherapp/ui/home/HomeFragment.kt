@@ -20,10 +20,9 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment @Inject constructor(
+class HomeFragment constructor(
     private val locationsRecyclerViewAdapter: LocationsRecyclerViewAdapter
 ) : BaseFragment<FragmentHomeBinding>(), LocationTrackListener {
 
@@ -54,11 +53,10 @@ class HomeFragment @Inject constructor(
                 delay(700)
                 it?.let {
                     if (it.toString().isNotEmpty()) {
-                        viewModel.getNearLocations(it.toString(), null)
+                        viewModel.getNearLocations(it.toString())
                     } else {
                         viewModel.getNearLocations(
-                            null,
-                            "${App.currentLatitude},${App.currentLongitude}"
+                            null
                         )
                     }
                 }
@@ -100,8 +98,7 @@ class HomeFragment @Inject constructor(
         if (isAllowed) {
             job = lifecycleScope.launch {
                 viewModel.getNearLocations(
-                    null,
-                    "${App.currentLatitude},${App.currentLongitude}"
+                    null
                 )
             }
         }

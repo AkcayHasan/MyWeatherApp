@@ -25,11 +25,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField 'String', 'BASE_URL', '"https://www.metaweather.com/api/"'
+            buildConfigField 'String', 'IMAGE_URL', '"https://www.metaweather.com/"'
         }
         debug{
             versionNameSuffix ".1"
             applicationIdSuffix ".debug"
             buildConfigField 'String', 'BASE_URL', '"https://www.metaweather.com/api/"'
+            buildConfigField 'String', 'IMAGE_URL', '"https://www.metaweather.com/"'
         }
     }
     compileOptions {
@@ -98,6 +100,8 @@ dependencies {
 
     // Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.1'
 
 
 }

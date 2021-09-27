@@ -6,9 +6,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.RequestManager
+import com.example.myweatherapp.BuildConfig
 import com.example.myweatherapp.base.BaseFragment
 import com.example.myweatherapp.databinding.FragmentDetailBinding
 import com.example.myweatherapp.util.Status
+import com.example.myweatherapp.util.downloadImage
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -16,9 +18,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class DetailFragment @Inject constructor(
-    private val glide: RequestManager
-) : BaseFragment<FragmentDetailBinding>() {
+class DetailFragment : BaseFragment<FragmentDetailBinding>() {
 
     private lateinit var viewModel: DetailViewModel
     private val args: DetailFragmentArgs by navArgs()
@@ -48,14 +48,12 @@ class DetailFragment @Inject constructor(
                         binding.scrollView2.visibility = View.VISIBLE
                         binding.detailProgressBar.visibility = View.GONE
                         it.data?.let { response ->
-                            val weatherResult = response
-/*
+
                             binding.ivMainTodayWeatherIcon.downloadImage(
-                                glide,
-                                BuildConfig.BASE_URL + "/static/img/weather/png/" + weatherResult.consolidatedWeather[0].weatherStateAbbr + ".png"
+                                 response.consolidatedWeather[0].weatherStateAbbr
                             )
 
- */
+
                         }
                     }
                     Status.LOADING -> {
