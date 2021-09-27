@@ -5,8 +5,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.myweatherapp.BuildConfig
 import com.example.myweatherapp.R
-import com.example.myweatherapp.base.BaseServiceImpl
-import com.example.myweatherapp.features.weather.data.api.WeatherApi
 import com.example.myweatherapp.features.weather.data.repository.WeatherRepositoryImpl
 import com.example.myweatherapp.features.weather.domain.repository.IWeatherRepository
 import dagger.Module

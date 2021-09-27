@@ -13,7 +13,7 @@ class WeatherRepositoryImpl @Inject constructor(
     private val retrofit: Retrofit
 ) : IWeatherRepository,BaseServiceImpl() {
 
-    val weatherApi by lazy {
+    private val weatherApi: WeatherApi by lazy {
         retrofit.create(WeatherApi::class.java)
     }
 

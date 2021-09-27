@@ -1,4 +1,4 @@
-package com.example.myweatherapp.ui
+package com.example.myweatherapp.ui.detail
 
 import android.os.Bundle
 import android.view.View
@@ -6,13 +6,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.RequestManager
-import com.example.myweatherapp.BuildConfig
 import com.example.myweatherapp.base.BaseFragment
 import com.example.myweatherapp.databinding.FragmentDetailBinding
-import com.example.myweatherapp.features.weather.domain.mapper.toLocationWeatherInfo
 import com.example.myweatherapp.util.Status
-import com.example.myweatherapp.util.downloadImage
-import com.example.myweatherapp.viewmodel.DetailViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -52,7 +48,7 @@ class DetailFragment @Inject constructor(
                         binding.scrollView2.visibility = View.VISIBLE
                         binding.detailProgressBar.visibility = View.GONE
                         it.data?.let { response ->
-                            val weatherResult = response.toLocationWeatherInfo()
+                            val weatherResult = response
 /*
                             binding.ivMainTodayWeatherIcon.downloadImage(
                                 glide,

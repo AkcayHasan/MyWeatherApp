@@ -4,6 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import com.bumptech.glide.RequestManager
 import com.example.myweatherapp.adapter.LocationsRecyclerViewAdapter
+import com.example.myweatherapp.ui.detail.DetailFragment
+import com.example.myweatherapp.ui.home.HomeFragment
 import javax.inject.Inject
 
 class WeatherFragmentsFactory @Inject constructor(

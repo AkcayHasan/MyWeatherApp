@@ -1,10 +1,7 @@
-package com.example.myweatherapp.ui
+package com.example.myweatherapp.ui.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
@@ -15,10 +12,9 @@ import com.example.myweatherapp.App
 import com.example.myweatherapp.adapter.LocationsRecyclerViewAdapter
 import com.example.myweatherapp.base.BaseFragment
 import com.example.myweatherapp.databinding.FragmentHomeBinding
-import com.example.myweatherapp.features.weather.domain.mapper.toNearLocations
+import com.example.myweatherapp.ui.MainActivity
 import com.example.myweatherapp.util.LocationTrackListener
 import com.example.myweatherapp.util.Status
-import com.example.myweatherapp.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay

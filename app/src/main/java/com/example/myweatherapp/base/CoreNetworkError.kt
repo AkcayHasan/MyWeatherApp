@@ -13,6 +13,12 @@ class CoreNetworkError : Throwable {
     var error: Throwable? = null
     var errorCode = 0
 
+    companion object {
+        const val DEFAULT_ERROR_MESSAGE = "Bir sorun oluştu lütfen tekrar deneyiniz"
+        const val NETWORK_ERROR_MESSAGE = "İnternet bağlantınız yok. Lütfen bağlantıyı kontrol edeniz"
+        private const val ERROR_MESSAGE_HEADER = "Error-Message"
+    }
+
     constructor(code: Int, e: Throwable?) : super(e) {
         error = e
         errorCode = code
@@ -32,11 +38,14 @@ class CoreNetworkError : Throwable {
 
     override val message: String
         get() = error!!.message!!
+
     val isAuthFailure: Boolean
         get() = error is HttpException &&
                 (error as HttpException).code() == HttpURLConnection.HTTP_UNAUTHORIZED
+
     val isResponseNull: Boolean
         get() = error is HttpException && (error as HttpException).response() == null
+
     val appErrorMessage: String?
         get() {
             if (error is IOException) return NETWORK_ERROR_MESSAGE
@@ -61,21 +70,6 @@ class CoreNetworkError : Throwable {
         }
     }
 
-    override fun equals(o: Any?): Boolean {
-        if (this === o) return true
-        if (o == null || javaClass != o.javaClass) return false
-        val that = o as CoreNetworkError
-        return if (error != null) error == that.error else that.error == null
-    }
 
-    override fun hashCode(): Int {
-        return if (error != null) error.hashCode() else 0
-    }
 
-    companion object {
-        const val DEFAULT_ERROR_MESSAGE = "Bir sorun oluştu lütfen tekrar deneyiniz"
-        const val NETWORK_ERROR_MESSAGE =
-            "İnternet bağlantınız yok. Lütfen bağlantıyı kontrol edeniz"
-        private const val ERROR_MESSAGE_HEADER = "Error-Message"
-    }
 }
