@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(
     private val retrofit: Retrofit
-) : IWeatherRepository,BaseServiceImpl() {
+) : IWeatherRepository, BaseServiceImpl() {
 
     private val weatherApi: WeatherApi by lazy {
         retrofit.create(WeatherApi::class.java)
@@ -21,11 +21,11 @@ class WeatherRepositoryImpl @Inject constructor(
         searchText: String?,
         lattLong: String?
     ): Resource<List<NearLocationsResponse>> {
-       return getResponse(request =  { weatherApi.getNearLocations(searchText, lattLong) })
+        return getResponse(request = { weatherApi.getNearLocations(searchText, lattLong) })
     }
 
     override suspend fun getLocationWeatherInfo(woeId: Int): Resource<LocationWeatherResponse> {
-        return getResponse(request =  { weatherApi.getLocationWeather(woeId) })
+        return getResponse(request = { weatherApi.getLocationWeather(woeId) })
     }
 
 

@@ -7,17 +7,16 @@ import android.content.Intent
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Looper
 import android.provider.Settings
+import android.view.View
 import android.widget.Toast
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import com.example.myweatherapp.App
 import com.example.myweatherapp.R
 import com.example.myweatherapp.databinding.ActivityMainBinding
 import com.example.myweatherapp.util.Constants
 import com.example.myweatherapp.util.LocationTrackListener
 import com.example.myweatherapp.util.LocationUtil
+import com.example.myweatherapp.util.ToolbarChangesListener
 import com.google.android.gms.location.*
 import dagger.hilt.android.AndroidEntryPoint
 import pub.devrel.easypermissions.AppSettingsDialog
@@ -25,20 +24,17 @@ import pub.devrel.easypermissions.EasyPermissions
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
+class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks, ToolbarChangesListener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private lateinit var locationRequest: LocationRequest
-    private lateinit var locationCallback: LocationCallback
-
-
     private lateinit var locationTrackListener: LocationTrackListener
 
     @Inject
     lateinit var fragmentsFactory: WeatherFragmentsFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_MyWeatherApp)
         super.onCreate(savedInstanceState)
         supportFragmentManager.fragmentFactory = fragmentsFactory
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -48,12 +44,14 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
 
-
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
+        binding.backButton.setOnClickListener {
+            navController.popBackStack()
+        }
     }
 
-    fun setOnlocationTrackListener(listener: LocationTrackListener) {
+    fun setOnLocationTrackListener(listener: LocationTrackListener) {
         this.locationTrackListener = listener
     }
 
@@ -119,6 +117,18 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
+    }
+
+    override fun toolbarName(title: String) {
+        binding.toolbarTitle.text = title
+    }
+
+    override fun toolbarBackButton(isDetailFragment: Boolean) {
+        if (isDetailFragment){
+            binding.backButton.visibility = View.VISIBLE
+        }else{
+            binding.backButton.visibility = View.GONE
+        }
     }
 
 }

@@ -15,6 +15,4 @@ class OperationSystemRepositoryImpl(private val context: Context) :
     @SuppressLint("MissingPermission")
     override suspend fun getLastKnowLocation(): Location =
         LocationServices.getFusedLocationProviderClient(context).lastLocation.await()
-
-
 }

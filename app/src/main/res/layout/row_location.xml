@@ -2,16 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    android:paddingBottom="2dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        app:cardCornerRadius="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp">
+        app:cardCornerRadius="20dp"
+        android:backgroundTint="@color/page_bg_color">
 
         <TextView
             android:id="@+id/nearestCityName"

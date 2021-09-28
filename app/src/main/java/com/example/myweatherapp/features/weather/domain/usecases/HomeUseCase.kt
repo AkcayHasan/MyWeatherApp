@@ -22,11 +22,11 @@ class HomeUseCase @Inject constructor(
             emit(Resource.loading(null))
             val result = weatherRepository.getNearLocations(searchText, lattLong)
             result.data?.let {
-               emit( Resource.success(it.map { response->
+                emit(Resource.success(it.map { response ->
                     response.toNearLocations()
                 }))
-            }?: kotlin.run {
-                emit(Resource.error(result.message?:"",null))
+            } ?: kotlin.run {
+                emit(Resource.error(result.message ?: "", null))
             }
         }.flowOn(Dispatchers.IO)
     }

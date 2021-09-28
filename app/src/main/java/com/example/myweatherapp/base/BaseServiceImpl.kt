@@ -15,10 +15,10 @@ open class BaseServiceImpl @Inject constructor() {
                     return@let Resource.success(it)
                 } ?: Resource.error("An Error Occured!", null)
             } else {
-              return Resource.error("An Error Occured!", null)
+                return Resource.error("An Error Occured!", null)
             }
         } catch (e: Throwable) {
-          return Resource.error(CoreNetworkError(e).appErrorMessage?:"", null)
+            return Resource.error(CoreNetworkError(e).appErrorMessage ?: "", null)
         }
     }
 

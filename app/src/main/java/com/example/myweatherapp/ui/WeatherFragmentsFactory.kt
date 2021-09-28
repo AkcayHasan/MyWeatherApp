@@ -9,9 +9,10 @@ import javax.inject.Inject
 
 class WeatherFragmentsFactory @Inject constructor(
     private val locationsRecyclerViewAdapter: LocationsRecyclerViewAdapter,
-) : FragmentFactory(){
+) : FragmentFactory() {
+
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
-        return when(className){
+        return when (className) {
             HomeFragment::class.java.name -> HomeFragment(locationsRecyclerViewAdapter)
             DetailFragment::class.java.name -> DetailFragment()
             else -> super.instantiate(classLoader, className)

@@ -12,7 +12,7 @@ import javax.inject.Inject
 class LocationsRecyclerViewAdapter @Inject constructor() :
     RecyclerView.Adapter<LocationsRecyclerViewAdapter.LocationsViewHolder>() {
 
-    private var locationClickListener: ((Int) -> Unit)? = null
+    private var locationClickListener: ((NearLocations) -> Unit)? = null
 
     inner class LocationsViewHolder(private val itemViewBinding: RowLocationBinding) :
         RecyclerView.ViewHolder(itemViewBinding.root) {
@@ -23,8 +23,7 @@ class LocationsRecyclerViewAdapter @Inject constructor() :
 
     }
 
-
-    fun setOnLocationClickListener(listener: (Int) -> Unit) {
+    fun setOnLocationClickListener(listener: (NearLocations) -> Unit) {
         locationClickListener = listener
     }
 
@@ -57,7 +56,7 @@ class LocationsRecyclerViewAdapter @Inject constructor() :
 
         holder.itemView.setOnClickListener {
             locationClickListener?.let {
-                it(locationInstance.woeId)
+                it(locationInstance)
             }
         }
     }

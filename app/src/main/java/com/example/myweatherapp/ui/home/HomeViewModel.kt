@@ -30,18 +30,19 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 operationSystemUseCase.getUserLocation().collect {
-                    if (searchText?.isNotEmpty() == true){
+                    if (searchText?.isNotEmpty() == true) {
                         homeUseCase.getNearLocations(searchText, null).collect { response ->
                             nearLocations.value = response
                         }
-                    }else{
-                        homeUseCase.getNearLocations(searchText, "${it.latitude}, ${it.longitude}").collect { response ->
-                            nearLocations.value = response
-                        }
+                    } else {
+                        homeUseCase.getNearLocations(searchText, "${it.latitude}, ${it.longitude}")
+                            .collect { response ->
+                                nearLocations.value = response
+                            }
                     }
                 }
 
-            }catch (e: Exception){
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
         }

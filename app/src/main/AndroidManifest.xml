@@ -17,7 +17,8 @@
         android:theme="@style/Theme.MyWeatherApp">
         <activity
             android:name=".ui.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/LauncherFullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

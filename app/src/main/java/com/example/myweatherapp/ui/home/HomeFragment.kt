@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.myweatherapp.App
+import com.example.myweatherapp.R
 import com.example.myweatherapp.adapter.LocationsRecyclerViewAdapter
 import com.example.myweatherapp.base.BaseFragment
 import com.example.myweatherapp.databinding.FragmentHomeBinding
@@ -36,9 +36,13 @@ class HomeFragment constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as MainActivity).setOnlocationTrackListener(this)
+        (activity as MainActivity).setOnLocationTrackListener(this)
+        val toolbarListener = activity as MainActivity
 
         viewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
+
+        toolbarListener.toolbarName(binding.root.context.getString(R.string.app_name))
+        toolbarListener.toolbarBackButton(false)
 
         binding.rvLocations.apply {
             adapter = locationsRecyclerViewAdapter
@@ -47,6 +51,18 @@ class HomeFragment constructor(
 
         observeStateFlow()
 
+        locationsRecyclerViewAdapter.setOnLocationClickListener {
+            toolbarListener.toolbarName(it.title)
+            toolbarListener.toolbarBackButton(true)
+
+            val action = HomeFragmentDirections.homeFragmentToDetailFragment(it.woeId)
+            findNavController().navigate(action)
+        }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
         binding.searchText.addTextChangedListener {
             job?.cancel()
             job = lifecycleScope.launch {
@@ -62,13 +78,6 @@ class HomeFragment constructor(
                 }
             }
         }
-
-        locationsRecyclerViewAdapter.setOnLocationClickListener {
-            val action = HomeFragmentDirections.homeFragmentToDetailFragment(it)
-            findNavController().navigate(action)
-        }
-
-
     }
 
     private fun observeStateFlow() {
@@ -77,11 +86,13 @@ class HomeFragment constructor(
                   when (it.status) {
                        Status.SUCCESS -> {
                            binding.homeProgressBar.visibility = View.GONE
+                           binding.rvLocations.visibility = View.VISIBLE
                            it.data?.let { listNearLocationsResponse ->
                                locationsRecyclerViewAdapter.locations = listNearLocationsResponse
                            }
                        }
                        Status.LOADING -> {
+                           binding.rvLocations.visibility = View.GONE
                            binding.homeProgressBar.visibility = View.VISIBLE
                        }
                        Status.ERROR -> {

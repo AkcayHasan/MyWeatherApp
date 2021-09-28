@@ -9,7 +9,7 @@ import androidx.viewbinding.ViewBinding
 
 abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
-    private var _binding : VB ?= null
+    private var _binding: VB? = null
 
     val binding get() = _binding!!
 
@@ -22,7 +22,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         return binding.root
     }
 
-    abstract fun getViewBinding() : VB
+    abstract fun getViewBinding(): VB
 
     override fun onDestroyView() {
         super.onDestroyView()

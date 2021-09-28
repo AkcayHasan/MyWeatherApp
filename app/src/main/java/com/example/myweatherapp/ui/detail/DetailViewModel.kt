@@ -2,7 +2,6 @@ package com.example.myweatherapp.ui.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myweatherapp.features.weather.data.entities.weatherresponse.LocationWeatherResponse
 import com.example.myweatherapp.features.weather.domain.entities.weather.LocationWeatherInfo
 import com.example.myweatherapp.features.weather.domain.usecases.DetailUseCase
 import com.example.myweatherapp.util.Resource
@@ -33,9 +32,7 @@ class DetailViewModel @Inject constructor(
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-
         }
-
     }
 
 
