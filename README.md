@@ -8,6 +8,7 @@ Ana sayfada kullanıcının lokasyon bilgisini alarak yakındaki şehirleri gös
 - MVVM
 - Retrofit
 - OkHttp
+- View Binding
 - Coroutines
 - Flow API
 - Dagger/Hilt
