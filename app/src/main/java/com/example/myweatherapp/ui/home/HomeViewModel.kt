@@ -35,7 +35,7 @@ class HomeViewModel @Inject constructor(
                             nearLocations.value = response
                         }
                     } else {
-                        homeUseCase.getNearLocations(searchText, "${it.latitude}, ${it.longitude}")
+                        homeUseCase.getNearLocations(searchText, "${it.data?.latitude}, ${it.data?.longitude}")
                             .collect { response ->
                                 nearLocations.value = response
                             }

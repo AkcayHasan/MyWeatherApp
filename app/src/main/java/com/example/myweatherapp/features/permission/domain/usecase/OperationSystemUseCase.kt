@@ -1,7 +1,9 @@
 package com.example.myweatherapp.features.permission.domain.usecase
 
 import android.location.Location
+import com.example.myweatherapp.base.CoreNetworkError
 import com.example.myweatherapp.features.permission.domain.repository.OperationSystemRepository
+import com.example.myweatherapp.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -13,14 +15,12 @@ class OperationSystemUseCase @Inject constructor(
 ) {
 
     suspend fun getUserLocation(
-    ): Flow<Location> {
+    ): Flow<Resource<Location>> {
         return flow {
             try {
-                operationSystemRepository.getLastKnowLocation()?.let {
-                    emit(it)
-                }
+                emit(Resource.success(operationSystemRepository.getLastKnowLocation()))
             } catch (ex: Exception) {
-                ex.printStackTrace()
+                Resource.error(CoreNetworkError(ex).appErrorMessage ?: "", null)
             }
         }.flowOn(Dispatchers.IO)
     }
